@@ -129,8 +129,8 @@ public class Maze {
                 }
 
                 drawMap();
-                System.out.println(player.getPosX());
-                System.out.println(player.getPosY());
+//                System.out.println(player.getPosX());
+//                System.out.println(player.getPosY());
                 break;
             case EAST:
                 while (player.getPosX()+1 < mazeWidth && map.get(player.getPosY()).get(player.getPosX()+1).getType() != TileType.WALL) {
@@ -145,8 +145,8 @@ public class Maze {
                 }
 
                 drawMap();
-                System.out.println(player.getPosX());
-                System.out.println(player.getPosY());
+//                System.out.println(player.getPosX());
+//                System.out.println(player.getPosY());
                 break;
             case WEST:
                 while (player.getPosX()-1 >= 0 && map.get(player.getPosY()).get(player.getPosX()-1).getType() != TileType.WALL) {
@@ -161,8 +161,8 @@ public class Maze {
                 }
 
                 drawMap();
-                System.out.println(player.getPosX());
-                System.out.println(player.getPosY());
+//                System.out.println(player.getPosX());
+//                System.out.println(player.getPosY());
                 break;
             case SOUTH:
                 while (player.getPosY()+1 < mazeHeight && map.get(player.getPosY()+1).get(player.getPosX()).getType() != TileType.WALL) {
@@ -177,8 +177,8 @@ public class Maze {
                 }
 
                 drawMap();
-                System.out.println(player.getPosX());
-                System.out.println(player.getPosY());
+//                System.out.println(player.getPosX());
+//                System.out.println(player.getPosY());
                 break;
             default:
                 break;
