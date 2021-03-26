@@ -10,19 +10,29 @@ public class Maze {
     private List<List<Tile>> map;
     private File level;
     private Player player;
+    private int maxPoints;
 
-    public Maze(File level) {
+    public Maze(File level, Player player) {
         this.mazeWidth = 0;
         this.mazeHeight = 0;
         this.map = new ArrayList<>();
         this.level = level;
-        this.player = null;
+        this.player = player;
+        this.maxPoints = 0;
 
         this.createMap();
     }
 
     public Player getPlayer() {
         return player;
+    }
+
+    public List<List<Tile>> getMap() {
+        return map;
+    }
+
+    public int getMaxPoints() {
+        return maxPoints;
     }
 
     private void createMap() {
@@ -48,10 +58,13 @@ public class Maze {
                             break;
                         case 'P':
                             this.map.get(i).add(new Point());
+                            maxPoints++;
                             break;
                         case 'V':
-                            this.player = new Player(j, i);
+//                            this.player = new Player(j, i);
                             this.map.get(i).add(this.player);
+                            this.player.setPosX(j);
+                            this.player.setPosY(i);
                             break;
                         default:
                     }
@@ -71,6 +84,7 @@ public class Maze {
             System.out.println();
         }
 
+        System.out.println("Moves left: " + player.getMoves());
         System.out.print("+");
 
         for (int i = 0; i < mazeWidth; i++) {
@@ -128,6 +142,7 @@ public class Maze {
                     player.setPosY(player.getPosY()-1);
                 }
 
+                player.setMoves(player.getMoves()-1);
                 drawMap();
 //                System.out.println(player.getPosX());
 //                System.out.println(player.getPosY());
@@ -144,13 +159,14 @@ public class Maze {
                     player.setPosX(player.getPosX()+1);
                 }
 
+                player.setMoves(player.getMoves()-1);
                 drawMap();
 //                System.out.println(player.getPosX());
 //                System.out.println(player.getPosY());
                 break;
             case WEST:
                 while (player.getPosX()-1 >= 0 && map.get(player.getPosY()).get(player.getPosX()-1).getType() != TileType.WALL) {
-                    if (map.get(player.getPosY()-1).get(player.getPosX()).getType() == TileType.POINT) {
+                    if (map.get(player.getPosY()).get(player.getPosX()-1).getType() == TileType.POINT) {
                         player.addPoint();
                     }
 
@@ -160,6 +176,7 @@ public class Maze {
                     player.setPosX(player.getPosX()-1);
                 }
 
+                player.setMoves(player.getMoves()-1);
                 drawMap();
 //                System.out.println(player.getPosX());
 //                System.out.println(player.getPosY());
@@ -176,6 +193,7 @@ public class Maze {
                     player.setPosY(player.getPosY()+1);
                 }
 
+                player.setMoves(player.getMoves()-1);
                 drawMap();
 //                System.out.println(player.getPosX());
 //                System.out.println(player.getPosY());

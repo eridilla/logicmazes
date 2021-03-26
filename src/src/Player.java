@@ -2,16 +2,30 @@ public class Player extends Tile {
     private int points;
     private int posX;
     private int posY;
+    private int moves;
 
-    public Player(int posX, int posY) {
+    public Player() {
         super(TileType.PLAYER);
         this.points = 0;
-        this.posX = posX;
-        this.posY = posY;
+        this.posX = 0;
+        this.posY = 0;
+        this.moves = 20;
     }
 
     public int getPoints() {
         return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getMoves() {
+        return moves;
+    }
+
+    public void setMoves(int moves) {
+        this.moves = moves;
     }
 
     public void addPoint() {
