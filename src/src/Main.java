@@ -1,9 +1,6 @@
 import gamestudio.entity.Score;
 import gamestudio.service.ScoreServiceJDBC;
-import org.checkerframework.checker.units.qual.A;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +14,6 @@ public class Main {
         List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
 
         do {
-            game.getMap().getPlayer().setMoves(20);
             System.out.println("Welcome to Logical Mazes!");
             System.out.println("1. Play!");
             System.out.println("2. Leaderboards");
@@ -32,6 +28,7 @@ public class Main {
             }
 
             if (game.getGameState() == GameState.PLAYING) {
+                game.getMap().getPlayer().setMoves(20);
                 game.getMap().drawMap();
             }
 
