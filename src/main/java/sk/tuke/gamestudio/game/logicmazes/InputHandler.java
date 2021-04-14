@@ -1,12 +1,10 @@
 package sk.tuke.gamestudio.game.logicmazes;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import sk.tuke.gamestudio.entity.Comment;
 import sk.tuke.gamestudio.entity.Rating;
 import sk.tuke.gamestudio.entity.Score;
-import sk.tuke.gamestudio.service.CommentService;
-import sk.tuke.gamestudio.service.CommentServiceJDBC;
-import sk.tuke.gamestudio.service.RatingServiceJDBC;
-import sk.tuke.gamestudio.service.ScoreServiceJDBC;
+import sk.tuke.gamestudio.service.*;
 
 import java.io.File;
 import java.util.Date;
@@ -15,6 +13,9 @@ import java.util.Scanner;
 
 public class InputHandler {
     private Game game;
+
+    @Autowired
+    private ScoreService scoreService;
 
     public InputHandler(Game game) {
         this.game = game;
@@ -55,8 +56,9 @@ public class InputHandler {
                         game.levelSelect();
                         break;
                     case 2:
-                        ScoreServiceJDBC scoreJDBC = new ScoreServiceJDBC();
-                        List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
+//                        ScoreServiceJDBC scoreJDBC = new ScoreServiceJDBC();
+//                        List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
+                        List<Score> leaderboard = scoreService.getTopScores("Logical Mazes");
                         game.printLeaderboard(leaderboard);
 
                         System.out.println();
