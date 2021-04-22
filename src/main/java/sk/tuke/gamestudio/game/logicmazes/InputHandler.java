@@ -14,8 +14,8 @@ import java.util.Scanner;
 public class InputHandler {
     private Game game;
 
-//    @Autowired
-//    private ScoreService scoreService;
+    @Autowired
+    private ScoreService scoreService;
 
     @Autowired
     private CommentService commentService;
@@ -72,10 +72,9 @@ public class InputHandler {
                     case 2:
 //                        ScoreServiceJDBC scoreJDBC = new ScoreServiceJDBC();
 //                        List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
-//                        List<Score> leaderboard = scoreService.getTopScores("Logical Mazes");
-//                        game.printLeaderboard(leaderboard);
+                        List<Score> leaderboard = scoreService.getTopScores("logicmazes");
+                        game.printLeaderboard(leaderboard);
 
-                        System.out.println("Work in progress...");
                         System.out.println();
                         System.out.print("Back to menu? (Y/N): ");
 
@@ -106,21 +105,51 @@ public class InputHandler {
                         }
 
                         System.out.println();
-                        System.out.print("Submit rating? (Y/N): ");
+                        System.out.println("1. Submit rating\n2. Find rating by name");
+                        System.out.println();
+                        System.out.print("Select option or quit (1, 2, [Q]uit): ");
                         input = scanner.nextLine().toUpperCase();
 
-                        if (input.equals("Y") || input.equals("YES")) {
-                            System.out.print("Rate my game from 1 (bad) to 5 (great): ");
-                            int rating = scanner.nextInt();
+                        if (input.equals("Q")) {
+                            System.out.println("Returning to menu...");
+                            System.out.println();
+                            return InputReturn.SUCCESS;
+                        }
+
+                        int inp = Integer.parseInt(input);
+
+                        if (inp != 1 && inp != 2) {
+                            while (inp != 1 && inp != 2) {
+                                System.out.print("Invalid input, please try again: ");
+                                inp = scanner.nextInt();
+                            }
+                        }
+
+                        if (inp == 1) {
+                            System.out.print("Rate my game from 1 (bad) to 5 (great) or [Q]uit: ");
+                            input = scanner.nextLine().toUpperCase();
+
+                            if (input.equals("Q")) {
+                                System.out.println("Returning to menu...");
+                                System.out.println();
+                                return InputReturn.SUCCESS;
+                            }
+
+                            int rating = Integer.parseInt(input);
 
                             while (rating < 1 || rating > 5) {
                                 System.out.print("Invalid input, please try again: ");
                                 rating = scanner.nextInt();
                             }
 
-                            System.out.print("Enter your name: ");
+                            System.out.print("Enter your name or [Q]uit: ");
                             input = scanner.nextLine();
-                            input = scanner.nextLine();
+
+                            if (input.equals("Q")) {
+                                System.out.println("Returning to menu...");
+                                System.out.println();
+                                return InputReturn.SUCCESS;
+                            }
 
                             Rating ratingObj = new Rating("logicmazes", input, rating);
 
@@ -132,12 +161,52 @@ public class InputHandler {
                             return InputReturn.SUCCESS;
                         }
 
-                        if (input.equals("N") || input.equals("NO")) {
+                        if (inp == 2) {
+                            System.out.print("Enter player name or [Q]uit: ");
+                            input = scanner.nextLine();
+
+                            if (input.equals("Q") || input.equals("q")) {
+                                System.out.println("Returning to menu...");
+                                System.out.println();
+                                return InputReturn.SUCCESS;
+                            }
+
+                            int playerRating = ratingService.getRating("logicmazes", input);
+
+                            while (playerRating < 1 || playerRating > 5) {
+                                System.out.print("Could not find player " + input + ". Please try again or [Q]uit: ");
+                                input = scanner.nextLine();
+
+                                if (input.equals("Q") || input.equals("q")) {
+                                    System.out.println("Returning to menu...");
+                                    System.out.println();
+                                    return InputReturn.SUCCESS;
+                                }
+
+                                playerRating = ratingService.getRating("logicmazes", input);
+                            }
+
+                            System.out.println("Player " + input + " has rated this game " + playerRating + "/5");
+                        }
+
+                        System.out.println("Return to menu [Y/N]?: ");
+
+                        input = scanner.nextLine().toUpperCase();
+
+                        if (input.equals("Y") || input.equals("YES")) {
                             game.setGameState(GameState.MENU);
+                            System.out.println("Returning to menu...");
                             System.out.println();
                             return InputReturn.SUCCESS;
                         }
 
+                        if (input.equals("N") || input.equals("NO")) {
+                            game.setGameState(GameState.EXIT);
+                            System.out.println("Exiting game...");
+                            return InputReturn.SUCCESS;
+                        }
+
+                        return InputReturn.SUCCESS;
                     case 4:
 //                        CommentServiceJDBC commentJDBC = new CommentServiceJDBC();
                         List<Comment> comments = commentService.getComments("logicmazes");

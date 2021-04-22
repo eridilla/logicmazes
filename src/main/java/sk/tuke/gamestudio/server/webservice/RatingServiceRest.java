@@ -13,12 +13,17 @@ public class RatingServiceRest {
     private RatingService ratingService;
 
     @GetMapping("/{game}")
-    public int getComments(@PathVariable String game) {
+    public int getAverageRating(@PathVariable String game) {
         return ratingService.getAverageRating(game);
     }
 
+    @GetMapping("/{game}/{name}")
+    public int getRating(@PathVariable String game, @PathVariable String name) {
+        return ratingService.getRating(game, name);
+    }
+
     @PostMapping
-    public void addComment(@RequestBody Rating rating) {
+    public void setRating(@RequestBody Rating rating) {
         ratingService.setRating(rating);
     }
 }

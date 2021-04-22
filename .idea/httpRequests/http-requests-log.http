@@ -1,5 +1,29 @@
 GET http://localhost:8080/api/rating/logicmazes
 
+<> 2021-04-22T235840.200.json
+
+###
+
+GET http://localhost:8080/api/rating/logicmazes
+
+<> 2021-04-22T235612.200.json
+
+###
+
+GET http://localhost:8080/api/rating/logicmazes/asdf
+
+<> 2021-04-22T235609.200.json
+
+###
+
+GET http://localhost:8080/api/rating/logicmazes/ccc
+
+<> 2021-04-22T235602.200.json
+
+###
+
+GET http://localhost:8080/api/rating/logicmazes
+
 <> 2021-04-22T231118.200.json
 
 ###
