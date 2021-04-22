@@ -24,7 +24,7 @@ public class ConsoleUI {
         handler.setGame(game);
 //        ScoreServiceJDBC scoreJDBC = new ScoreServiceJDBC();
 //        List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
-        List<Score> leaderboard = scoreService.getTopScores("Logical Mazes");
+        List<Score> leaderboard = scoreService.getTopScores("logicmazes");
 
         do {
             System.out.println("Welcome to Logical Mazes!");

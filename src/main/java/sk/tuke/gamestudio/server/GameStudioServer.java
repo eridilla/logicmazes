@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 import sk.tuke.gamestudio.service.*;
 
 @SpringBootApplication
@@ -28,5 +29,10 @@ public class GameStudioServer {
     @Bean
     public RatingService ratingService() {
         return new RatingServiceJPA();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

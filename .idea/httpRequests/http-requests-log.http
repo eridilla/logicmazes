@@ -1,5 +1,11 @@
 GET http://localhost:8080/api/rating/logicmazes
 
+<> 2021-04-22T231118.200.json
+
+###
+
+GET http://localhost:8080/api/rating/logicmazes
+
 <> 2021-04-22T222843.200.json
 
 ###
