@@ -1,11 +1,18 @@
 package sk.tuke.gamestudio.entity;
 
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@NamedQuery(name = "Comment.getComments",
+        query = "SELECT c FROM Comment c WHERE c.game=:game ORDER BY c.date DESC")
+@NamedQuery(name = "Comment.resetComments",
+        query = "DELETE FROM Comment")
 public class Comment implements Serializable {
     private String name;
     private String comment;

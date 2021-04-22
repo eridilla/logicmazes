@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import sk.tuke.gamestudio.game.logicmazes.ConsoleUI;
-import sk.tuke.gamestudio.service.ScoreService;
-import sk.tuke.gamestudio.service.ScoreServiceJPA;
+import sk.tuke.gamestudio.game.logicmazes.Game;
+import sk.tuke.gamestudio.game.logicmazes.InputHandler;
+import sk.tuke.gamestudio.service.*;
 
 @SpringBootApplication
 @Configuration
@@ -23,12 +24,32 @@ public class SpringClient {
     }
 
     @Bean
-    public ConsoleUI consoleUI() {
-        return new ConsoleUI();
+    public ConsoleUI consoleUI(InputHandler handler) {
+        return new ConsoleUI(handler);
+    }
+
+    @Bean
+    public InputHandler inputHandler(Game game) {
+        return new InputHandler(game);
+    }
+
+    @Bean
+    public Game game() {
+        return new Game();
     }
 
     @Bean
     public ScoreService scoreService() {
         return new ScoreServiceJPA();
+    }
+
+    @Bean
+    public RatingService ratingService() {
+        return new RatingServiceJPA();
+    }
+
+    @Bean
+    public CommentService commentService() {
+        return new CommentServiceJPA();
     }
 }

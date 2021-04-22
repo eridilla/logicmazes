@@ -14,10 +14,24 @@ import java.util.Scanner;
 public class InputHandler {
     private Game game;
 
+//    @Autowired
+//    private ScoreService scoreService;
+
     @Autowired
-    private ScoreService scoreService;
+    private CommentService commentService;
+
+    @Autowired
+    private RatingService ratingService;
 
     public InputHandler(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
         this.game = game;
     }
 
@@ -58,13 +72,15 @@ public class InputHandler {
                     case 2:
 //                        ScoreServiceJDBC scoreJDBC = new ScoreServiceJDBC();
 //                        List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
-                        List<Score> leaderboard = scoreService.getTopScores("Logical Mazes");
-                        game.printLeaderboard(leaderboard);
+//                        List<Score> leaderboard = scoreService.getTopScores("Logical Mazes");
+//                        game.printLeaderboard(leaderboard);
 
+                        System.out.println("Work in progress...");
                         System.out.println();
                         System.out.print("Back to menu? (Y/N): ");
 
                         input = scanner.nextLine().toUpperCase();
+
 
                         if (input.equals("Y") || input.equals("YES")) {
                             game.setGameState(GameState.MENU);
@@ -79,9 +95,16 @@ public class InputHandler {
                         }
                         break;
                     case 3:
-                        RatingServiceJDBC ratingJDBC = new RatingServiceJDBC();
+//                        RatingServiceJDBC ratingJDBC = new RatingServiceJDBC();
 
-                        System.out.println("Average rating for Logic Mazes: " + ratingJDBC.getAverageRating("Logic Mazes") + "/5");
+                        int avgRating = ratingService.getAverageRating("Logic Mazes");
+
+                        if (avgRating == -1) {
+                            System.out.println("No ratings yet...");
+                        } else {
+                            System.out.println("Average rating for Logic Mazes: " + avgRating + "/5");
+                        }
+
                         System.out.println();
                         System.out.print("Submit rating? (Y/N): ");
                         input = scanner.nextLine().toUpperCase();
@@ -98,11 +121,10 @@ public class InputHandler {
                             System.out.print("Enter your name: ");
                             input = scanner.nextLine();
                             input = scanner.nextLine();
-                            Date date = new Date();
 
-                            Rating ratingObj = new Rating("Logic Mazes", input, rating, date);
+                            Rating ratingObj = new Rating("Logic Mazes", input, rating);
 
-                            ratingJDBC.setRating(ratingObj);
+                            ratingService.setRating(ratingObj);
 
                             System.out.println("Rating submitted successfully! Returning to menu...");
                             System.out.println();
@@ -117,11 +139,10 @@ public class InputHandler {
                         }
 
                     case 4:
-                        CommentServiceJDBC commentJDBC = new CommentServiceJDBC();
+//                        CommentServiceJDBC commentJDBC = new CommentServiceJDBC();
+                        List<Comment> comments = commentService.getComments("Logic Mazes");
 
-                        List<Comment> comments = commentJDBC.getComments("Logic Mazes");
-
-                        if (comments == null) {
+                        if (comments.size() == 0) {
                             System.out.println("No comments submitted...");
                         } else {
                             System.out.println("Name\tComment");
@@ -146,7 +167,7 @@ public class InputHandler {
 
                             Comment commentObj = new Comment(input, comment, date, "Logic Mazes");
 
-                            commentJDBC.addComment(commentObj);
+                            commentService.addComment(commentObj);
 
                             System.out.println("Comment submitted successfully! Returning to menu...");
                             System.out.println();

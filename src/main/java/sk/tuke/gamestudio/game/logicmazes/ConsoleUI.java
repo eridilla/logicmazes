@@ -13,12 +13,18 @@ public class ConsoleUI {
     @Autowired
     private ScoreService scoreService;
 
+    private InputHandler handler;
+
+    public ConsoleUI(InputHandler handler) {
+        this.handler = handler;
+    }
+
     public void play() {
         Game game = new Game();
-        InputHandler handler = new InputHandler(game);
-        ScoreServiceJDBC scoreJDBC = new ScoreServiceJDBC();
-        List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
-//        List<Score> leaderboard = scoreService.getTopScores("Logical Mazes");
+        handler.setGame(game);
+//        ScoreServiceJDBC scoreJDBC = new ScoreServiceJDBC();
+//        List<Score> leaderboard = scoreJDBC.getTopScores("Logical Mazes");
+        List<Score> leaderboard = scoreService.getTopScores("Logical Mazes");
 
         do {
             System.out.println("Welcome to Logical Mazes!");
@@ -74,6 +80,7 @@ public class ConsoleUI {
 //                    scoreJDBC.addScore(score);
                     scoreService.addScore(score);
 
+                    leaderboard = scoreService.getTopScores("Logical Mazes");
                     game.printLeaderboard(leaderboard);
 
                     System.out.println();
