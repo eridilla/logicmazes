@@ -97,7 +97,7 @@ public class InputHandler {
                     case 3:
 //                        RatingServiceJDBC ratingJDBC = new RatingServiceJDBC();
 
-                        int avgRating = ratingService.getAverageRating("Logic Mazes");
+                        int avgRating = ratingService.getAverageRating("logicmazes");
 
                         if (avgRating == -1) {
                             System.out.println("No ratings yet...");
@@ -122,7 +122,7 @@ public class InputHandler {
                             input = scanner.nextLine();
                             input = scanner.nextLine();
 
-                            Rating ratingObj = new Rating("Logic Mazes", input, rating);
+                            Rating ratingObj = new Rating("logicmazes", input, rating);
 
                             ratingService.setRating(ratingObj);
 
@@ -140,7 +140,7 @@ public class InputHandler {
 
                     case 4:
 //                        CommentServiceJDBC commentJDBC = new CommentServiceJDBC();
-                        List<Comment> comments = commentService.getComments("Logic Mazes");
+                        List<Comment> comments = commentService.getComments("logicmazes");
 
                         if (comments.size() == 0) {
                             System.out.println("No comments submitted...");
@@ -165,7 +165,7 @@ public class InputHandler {
                             input = scanner.nextLine();
                             Date date = new Date();
 
-                            Comment commentObj = new Comment(input, comment, date, "Logic Mazes");
+                            Comment commentObj = new Comment(input, comment, date, "logicmazes");
 
                             commentService.addComment(commentObj);
 

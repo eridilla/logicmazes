@@ -1,8 +1,9 @@
 package sk.tuke.gamestudio;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import sk.tuke.gamestudio.game.logicmazes.ConsoleUI;
@@ -15,7 +16,7 @@ import sk.tuke.gamestudio.service.*;
 public class SpringClient {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringClient.class, args);
+        new SpringApplicationBuilder(SpringClient.class).web(WebApplicationType.NONE).run(args);
     }
 
     @Bean

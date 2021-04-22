@@ -76,11 +76,11 @@ public class ConsoleUI {
                     String name = scanner.nextLine();
 
                     Date date = new Date();
-                    Score score = new Score("Logical Mazes", name, game.getMap().getPlayer().getMoves(), date);
+                    Score score = new Score("logicmazes", name, game.getMap().getPlayer().getMoves(), date);
 //                    scoreJDBC.addScore(score);
                     scoreService.addScore(score);
 
-                    leaderboard = scoreService.getTopScores("Logical Mazes");
+                    leaderboard = scoreService.getTopScores("logicmazes");
                     game.printLeaderboard(leaderboard);
 
                     System.out.println();
