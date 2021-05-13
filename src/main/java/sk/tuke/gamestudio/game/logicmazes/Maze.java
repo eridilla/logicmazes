@@ -25,6 +25,22 @@ public class Maze {
         this.createMap();
     }
 
+    public int getMazeWidth() {
+        return mazeWidth;
+    }
+
+    public void setMazeWidth(int mazeWidth) {
+        this.mazeWidth = mazeWidth;
+    }
+
+    public int getMazeHeight() {
+        return mazeHeight;
+    }
+
+    public void setMazeHeight(int mazeHeight) {
+        this.mazeHeight = mazeHeight;
+    }
+
     public Player getPlayer() {
         return player;
     }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/styleSheet.css">
+    <title>Gamestudio</title>
+</head>
+<body>
+
+<div id="flexContainerCentered">
+    <h1>Logic Mazes</h1>
+    <h2>Select level</h2>
+    <div th:utext="${@logicMazesController.htmlLevelList}"></div>
+</div>
+
+</body>
+</html>

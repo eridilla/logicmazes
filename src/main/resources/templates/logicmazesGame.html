@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/styleSheet.css">
+    <title>Gamestudio</title>
+</head>
+<body>
+
+<div id="flexContainerCentered">
+    <h1>Logic Mazes</h1>
+
+    <div id="gameInfo">
+        <h3 th:text="${@logicMazesController.moves}"></h3>
+        <h3 th:text="${@logicMazesController.points}"></h3>
+    </div>
+
+    <div id="gameFieldContainer">
+        <span th:utext="${@logicMazesController.htmlField}"></span>
+
+        <div>
+            <table id="gameControls">
+                <tr>
+                    <td></td>
+                    <td><a href="/logicmazes/game?move=N"><button class="dirButton">^</button></a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href="/logicmazes/game?move=W"><button class="dirButton"><</button></a></td>
+                    <td></td>
+                    <td><a href="/logicmazes/game?move=E"><button class="dirButton">></button></a></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><a href="/logicmazes/game?move=S"><button class="dirButton">v</button></a></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <a href="/logicmazes"><button class="menuButton backButton">Menu</button></a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
+
+body {
+    background-image: url("/img/background2.gif");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Reggae One', cursive;
+    color: white;
+}
+
+h1 {
+    font-size: 85px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 40px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+#flexContainerCentered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#menuList {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menuButton {
+    width: 400px;
+    height: 50px;
+    margin-bottom: 20px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.menuButton:hover {
+    background-color: #3e8e41
+}
+
+.menuButton:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.backButton {
+    width: 250px;
+}
+
+#gameField {
+    border-collapse: collapse;
+    background: #503238;
+}
+
+#gameField tr td img {
+    height: 40px;
+    width: 40px;
+}
+
+#gameFieldContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+}
+
+#gameControls .dirButton {
+    width: 75px;
+    height: 75px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    font-size: 30px;
+}
+
+.dirButton:hover {
+    background-color: #3e8e41
+}
+
+.dirButton:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#gameInfo {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}

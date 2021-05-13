@@ -7,7 +7,7 @@ public abstract class Tile {
         this.type = type;
     }
 
-    TileType getType() {
+    public TileType getType() {
         return this.type;
     }
 }

@@ -34,6 +34,30 @@ public class Game {
         }
     }
 
+    public Game(File level) {
+        this.map = null;
+        this.gameState = GameState.MENU;
+        this.player = new Player();
+
+        this.levels = new ArrayList<>();
+
+        File folder = new File("src/main/resources/levels");
+
+        if (folder.listFiles() == null) {
+            System.out.println("The levels folder is empty. Exiting...");
+            gameState = GameState.EXIT;
+            return;
+        }
+
+        for (final File fileEntry : folder.listFiles()) {
+            if (!fileEntry.isDirectory()) {
+                levels.add(fileEntry.getName());
+            }
+        }
+
+        createGame(level);
+    }
+
     public GameState getGameState() {
         return gameState;
     }
