@@ -7,6 +7,7 @@ import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.service.*;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -232,7 +233,7 @@ public class InputHandler {
 
                             System.out.print("Enter your name: ");
                             input = scanner.nextLine();
-                            Date date = new Date();
+                            LocalDate date = LocalDate.now();
 
                             Comment commentObj = new Comment(input, comment, date, "logicmazes");
 

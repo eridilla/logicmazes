@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/styleSheet.css">
+    <title>Gamestudio</title>
+</head>
+<body onload="errCheck()">
+
+<div id="flexContainerCentered">
+    <h1>Logic Mazes</h1>
+    <h2>Sign In</h2>
+
+    <div class="containerWithBackground">
+        <h3 class="hiddenElement" id="userErr" style="color: red">User does not exist</h3>
+        <h3 class="hiddenElement" id="pwErr" style="color: red">Incorrect password</h3>
+        <form action="/logicmazes/login" id="registerLoginForm">
+            <table style="margin-bottom: 15px;">
+                <tr>
+                    <td><label for="username">Username:</label></td>
+                    <td><input type="text" name="username" id="username" required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" name="password" id="password" required></td>
+                </tr>
+            </table>
+            <button type="submit" class='menuButton'>Sign In</button>
+        </form>
+    </div>
+
+    <ul id="menuList">
+        <li><a href='/logicmazes'><button class='menuButton backButton'><< Back to menu</button></a></li>
+    </ul>
+</div>
+
+<script>
+    function errCheck() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const errMsg = urlParams.get('failed');
+
+        if (errMsg === "1") {
+            document.getElementById("userErr").classList.remove("hiddenElement");
+        } else if (errMsg === "2") {
+            document.getElementById("pwErr").classList.remove("hiddenElement");
+        }
+    }
+</script>
+
+</body>
+</html>

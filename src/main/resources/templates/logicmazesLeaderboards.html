@@ -21,11 +21,23 @@
 
 <div id="flexContainerCentered">
     <h1>Logic Mazes</h1>
+    <h2>Top scores</h2>
+
+    <div class="containerWithBackground">
+        <table id="topScoresTable">
+            <tr id="tableHeader">
+                <td><b>Player Name</b></td>
+                <td><b>Score</b></td>
+            </tr>
+            <tr th:each="score : ${scores}">
+                <td th:text="${score.player}"></td>
+                <td th:text="${score.points}"></td>
+            </tr>
+        </table>
+    </div>
+
     <ul id="menuList">
-        <li><a href="/logicmazes/levelselect"><button class="menuButton">Start Game</button></a></li>
-        <li><a href="/logicmazes/topscores"><button class="menuButton">Top Scores</button></a></li>
-        <li><a href="/logicmazes/ratings"><button class="menuButton">Ratings</button></a></li>
-        <li><a href="/logicmazes/comments"><button class="menuButton">Comments</button></a></li>
+        <li><a href='/logicmazes'><button class='menuButton backButton'><< Back to menu</button></a></li>
     </ul>
 </div>
 

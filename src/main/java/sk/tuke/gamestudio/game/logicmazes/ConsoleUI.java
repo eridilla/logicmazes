@@ -5,6 +5,7 @@ import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.service.ScoreService;
 import sk.tuke.gamestudio.service.ScoreServiceJDBC;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -75,7 +76,7 @@ public class ConsoleUI {
                     Scanner scanner = new Scanner(System.in);
                     String name = scanner.nextLine();
 
-                    Date date = new Date();
+                    LocalDate date = LocalDate.now();
                     Score score = new Score("logicmazes", name, game.getMap().getPlayer().getMoves(), date);
 //                    scoreJDBC.addScore(score);
                     scoreService.addScore(score);

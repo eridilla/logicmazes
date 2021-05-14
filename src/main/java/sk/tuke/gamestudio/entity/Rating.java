@@ -1,6 +1,8 @@
 package sk.tuke.gamestudio.entity;
 
 
+import jdk.jfr.Name;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +15,8 @@ import java.util.Date;
         query = "SELECT AVG(r.rating) FROM Rating r WHERE r.game=:game")
 @NamedQuery(name = "Rating.getRating",
         query = "SELECT r FROM Rating r WHERE r.game=:game AND r.name=:name")
+@NamedQuery(name = "Rating.deleteRating",
+        query = "DELETE FROM Rating r WHERE r.game=:game AND r.name=:name")
 @NamedQuery(name = "Rating.resetRatings",
         query = "DELETE FROM Rating ")
 public class Rating implements Serializable {

@@ -1,10 +1,13 @@
 package sk.tuke.gamestudio.entity;
 
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,7 +19,7 @@ public class Score implements Serializable {
     private String game;
     private String player;
     private int points;
-    private Date playedOn;
+    private LocalDate playedOn;
 
     @Id
     @GeneratedValue
@@ -24,7 +27,7 @@ public class Score implements Serializable {
 
     public Score() {}
 
-    public Score(String game, String player, int points, Date playedOn) {
+    public Score(String game, String player, int points, LocalDate playedOn) {
         this.game = game;
         this.player = player;
         this.points = points;
@@ -63,11 +66,11 @@ public class Score implements Serializable {
         this.points = points;
     }
 
-    public Date getPlayedOn() {
+    public LocalDate getPlayedOn() {
         return playedOn;
     }
 
-    public void setPlayedOn(Date playedOn) {
+    public void setPlayedOn(LocalDate playedOn) {
         this.playedOn = playedOn;
     }
 

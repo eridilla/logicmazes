@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
+import sk.tuke.gamestudio.entity.Comment;
+import sk.tuke.gamestudio.entity.Rating;
+import sk.tuke.gamestudio.entity.Score;
+import sk.tuke.gamestudio.entity.UserTable;
 import sk.tuke.gamestudio.game.logicmazes.Game;
 import sk.tuke.gamestudio.game.logicmazes.GameState;
 import sk.tuke.gamestudio.game.logicmazes.InputHandler;
@@ -14,8 +18,9 @@ import sk.tuke.gamestudio.game.logicmazes.Tile;
 import sk.tuke.gamestudio.service.CommentService;
 import sk.tuke.gamestudio.service.RatingService;
 import sk.tuke.gamestudio.service.ScoreService;
+import sk.tuke.gamestudio.service.UserService;
 
-import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
@@ -32,6 +37,9 @@ public class LogicMazesController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private UserService userService;
+
     private Game game;
     private InputHandler inputHandler;
     private String[][] rocks;
@@ -40,11 +48,6 @@ public class LogicMazesController {
 
     @RequestMapping
     public String logicmazes() {
-//        try {
-//
-//        } catch (Exception e) {
-//        }
-
         return "logicmazesMainMenu";
     }
 
@@ -66,14 +69,47 @@ public class LogicMazesController {
             inputHandler.nextInputWebApp(move);
         }
 
-        game.checkWin();
-        game.checkLose();
-
-        if (game.getGameState() == GameState.WIN || game.getGameState() == GameState.LOSE) {
-            return "logicmazesEnd";
-        }
+//        game.checkWin();
+//        game.checkLose();
+//
+//        if (game.getGameState() == GameState.WIN || game.getGameState() == GameState.LOSE) {
+//            return "logicmazesEnd";
+//        }
 
         return "logicmazesGame";
+    }
+
+    @RequestMapping("/topscores")
+    public String getLeaderboards(@RequestParam(required = false) String result, @RequestParam(required = false) String player, Model scoreModel) {
+        if (result != null && player != null) {
+            Score scoreObj = new Score("logicmazes", player, game.getPlayer().getMoves(), LocalDate.now());
+            scoreService.addScore(scoreObj);
+        }
+
+        fillModel(scoreModel);
+        return "logicmazesLeaderboards";
+    }
+
+    @RequestMapping("/ratings")
+    public String getRatings(@RequestParam(required = false) String rating, @RequestParam(required = false) String player, Model ratingModel) {
+        if (rating != null && player != null) {
+            Rating ratingObj = new Rating("logicmazes", player, Integer.parseInt(rating));
+            ratingService.setRating(ratingObj);
+        }
+
+        fillModel(ratingModel);
+        return "logicmazesRatings";
+    }
+
+    @RequestMapping("/comments")
+    public String getComments(@RequestParam(required = false) String playerName, @RequestParam(required = false) String commentText, Model commentsModel) {
+        if (playerName != null && commentText != null) {
+            Comment commentObj = new Comment(playerName, commentText, LocalDate.now(), "logicmazes");
+            commentService.addComment(commentObj);
+        }
+
+        fillModel(commentsModel);
+        return "logicmazesComments";
     }
 
     public String getHtmlLevelList() {
@@ -186,5 +222,39 @@ public class LogicMazesController {
             default:
                 throw new IllegalStateException("Generated invalid number");
         }
+    }
+
+//    public String getRatingByName() {
+//        StringBuilder sb = new StringBuilder();
+//
+//        if (ratingService.getRating("logicmazes", "gggg") <= 0) {
+//            sb.append("<i>Your rating:</i>\n");
+//            sb.append("<i>You haven't submitted a rating yet...</i>\n");
+//        } else {
+//            sb.append("<i>Your rating: ");
+//            sb.append(ratingService.getRating("logicmazes", "gggg"));
+//            sb.append("/5</i>\n");
+//        }
+//
+//        return sb.toString();
+//    }
+
+    public String getGameState() {
+        game.checkWin();
+        game.checkLose();
+
+        if (game.getGameState() == GameState.WIN) {
+            return "1";
+        } else if (game.getGameState() == GameState.LOSE) {
+            return "-1";
+        } else {
+            return "0";
+        }
+    }
+
+    private void fillModel(Model model) {
+        model.addAttribute("scores", scoreService.getTopScores("logicmazes"));
+        model.addAttribute("rating", ratingService.getAverageRating("logicmazes"));
+        model.addAttribute("comments", commentService.getComments("logicmazes"));
     }
 }

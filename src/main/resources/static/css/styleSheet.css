@@ -56,6 +56,25 @@ h2 {
     transform: translateY(4px);
 }
 
+.menuButtonSmall {
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.menuButtonSmall:hover {
+    background-color: #3e8e41
+}
+
+.menuButtonSmall:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
 .backButton {
     width: 250px;
 }
@@ -102,4 +121,68 @@ h2 {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
+}
+
+.containerWithBackground {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("/img/dirtTile.png");
+    padding: 20px;
+    border-radius: 25px;
+}
+
+#topScoresTable {
+    border-collapse: collapse;
+}
+
+#topScoresTable #tableHeader {
+    text-align: center;
+}
+
+#topScoresTable tr td {
+    border: 3px solid black;
+    padding: 10px;
+    width: 200px;
+}
+
+.hiddenElement {
+    display: none;
+}
+
+#yourRatingMsg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.commentsContainer {
+    width: 100%;
+}
+
+#commentForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#endGameOverlay {
+    position: absolute;
+    margin-top: 15px;
+}
+
+#registerLoginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginButtons {
+    position: absolute;
+    margin: 10px;
+    top: 0;
+    right: 0;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
 }

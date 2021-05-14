@@ -58,6 +58,10 @@ public class Game {
         createGame(level);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public GameState getGameState() {
         return gameState;
     }
@@ -109,14 +113,14 @@ public class Game {
     public void checkWin() {
         if (player.getPoints() == map.getMaxPoints()) {
             gameState = GameState.WIN;
-            player.setPoints(0);
+//            player.setPoints(0);
         }
     }
 
     public void checkLose() {
         if (player.getMoves() == 0) {
             gameState = GameState.LOSE;
-            player.setPoints(0);
+//            player.setPoints(0);
         }
     }
 

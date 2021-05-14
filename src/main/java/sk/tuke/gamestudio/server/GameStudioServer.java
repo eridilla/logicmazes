@@ -32,6 +32,11 @@ public class GameStudioServer {
     }
 
     @Bean
+    public UserService userService() {
+        return new UserServiceJPA();
+    }
+
+    @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }

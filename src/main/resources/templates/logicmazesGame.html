@@ -7,10 +7,38 @@
     <link rel="stylesheet" href="/css/styleSheet.css">
     <title>Gamestudio</title>
 </head>
-<body>
+<body onload="checkState()">
+
+<div class="hiddenElement" id="gameStateHidden" th:text="${@logicMazesController.gameState}"></div>
+
+<div class="loginButtons" th:if="${@userController.logged}">
+    <h3 style="margin-right: 10px">Logged in as: <i id="username" th:text="${@userController.loggedUser.username}"></i></h3>
+    <a href="/logicmazes/logout"><button class="menuButtonSmall">Sign Out</button></a>
+</div>
+
+<div class="loginButtons" th:if="${!@userController.logged}">
+    <a href="/logicmazes/login" style="margin-right: 10px"><button class="menuButtonSmall">Sign In</button></a>
+    <a href="/logicmazes/register"><button class="menuButtonSmall">Sign Up</button></a>
+</div>
 
 <div id="flexContainerCentered">
     <h1>Logic Mazes</h1>
+
+    <div class="containerWithBackground hiddenElement" id="endGameOverlay">
+        <h2 th:text="${@logicMazesController.winLose}"></h2>
+        <h3 th:text="${@logicMazesController.moves}"></h3>
+        <h3 th:text="${@logicMazesController.points}"></h3>
+
+        <form th:if="${@userController.logged}" action="/logicmazes/topscores">
+            <input type="hidden" name="result" value="1">
+            <input type="hidden" name="player" th:value="${@userController.loggedUser.username}">
+            <button type="submit" class='menuButton hiddenElement' id="submitButtonWin">Submit your score</button>
+        </form>
+
+<!--        <button th:if="${@userController.logged}"  class='menuButton hiddenElement' id="submitButtonWin" onclick="submitScore()">Submit your score</button>-->
+        <a th:if="${!@userController.logged}" href="/logicmazes"><button class='menuButton'>Back to menu</button></a>
+        <a href="/logicmazes"><button class='menuButton hiddenElement' id="submitButtonLose">Back to menu</button></a>
+    </div>
 
     <div id="gameInfo">
         <h3 th:text="${@logicMazesController.moves}"></h3>
@@ -24,25 +52,47 @@
             <table id="gameControls">
                 <tr>
                     <td></td>
-                    <td><a href="/logicmazes/game?move=N"><button class="dirButton">^</button></a></td>
+                    <td><a href="/logicmazes/game?move=N">
+                        <button class="dirButton">ᐃ</button>
+                    </a></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><a href="/logicmazes/game?move=W"><button class="dirButton"><</button></a></td>
+                    <td><a href="/logicmazes/game?move=W">
+                        <button class="dirButton">ᐊ</button>
+                    </a></td>
                     <td></td>
-                    <td><a href="/logicmazes/game?move=E"><button class="dirButton">></button></a></td>
+                    <td><a href="/logicmazes/game?move=E">
+                        <button class="dirButton">ᐅ</button>
+                    </a></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><a href="/logicmazes/game?move=S"><button class="dirButton">v</button></a></td>
+                    <td><a href="/logicmazes/game?move=S">
+                        <button class="dirButton">ᐁ</button>
+                    </a></td>
                     <td></td>
                 </tr>
             </table>
         </div>
     </div>
 
-    <a href="/logicmazes"><button class="menuButton backButton">Menu</button></a>
+    <a href="/logicmazes">
+        <button class="menuButton backButton">Menu</button>
+    </a>
 </div>
+
+<script>
+    function checkState() {
+        if (document.getElementById("gameStateHidden").innerText === "1") {
+            document.getElementById("endGameOverlay").classList.remove("hiddenElement");
+            document.getElementById("submitButtonWin").classList.remove("hiddenElement");
+        } else if (document.getElementById("gameStateHidden").innerText === "-1") {
+            document.getElementById("endGameOverlay").classList.remove("hiddenElement");
+            document.getElementById("submitButtonLose").classList.remove("hiddenElement");
+        }
+    }
+</script>
 
 </body>
 </html>

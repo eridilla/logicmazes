@@ -21,7 +21,7 @@ public class CommentServiceJDBC implements CommentService {
         ) {
             statement.setString(1, comment.getName());
             statement.setString(2, comment.getComment());
-            statement.setTimestamp(3, new Timestamp(comment.getDate().getTime()));
+//            statement.setTimestamp(3, new Timestamp(comment.getDate().getTime()));
             statement.setString(4, comment.getGame());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -43,7 +43,7 @@ public class CommentServiceJDBC implements CommentService {
                 List<Comment> comments = new ArrayList<>();
 
                 while (rs.next()) {
-                    comments.add(new Comment(rs.getString(1), rs.getString(2), rs.getTimestamp(3), rs.getString(4)));
+//                    comments.add(new Comment(rs.getString(1), rs.getString(2), rs.getTimestamp(3), rs.getString(4)));
                 }
 
                 return comments;

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,7 @@ public class Comment implements Serializable {
     private String name;
     private String comment;
     private String game;
-    private Date date;
+    private LocalDate date;
 
     @Id
     @GeneratedValue
@@ -25,7 +26,7 @@ public class Comment implements Serializable {
 
     public Comment() {}
 
-    public Comment(String name, String comment, Date date, String game) {
+    public Comment(String name, String comment, LocalDate date, String game) {
         this.name = name;
         this.comment = comment;
         this.date = date;
@@ -56,11 +57,11 @@ public class Comment implements Serializable {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

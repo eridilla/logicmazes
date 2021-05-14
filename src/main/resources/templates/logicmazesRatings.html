@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/styleSheet.css">
+    <title>Gamestudio</title>
+</head>
+<body>
+
+<div class="loginButtons" th:if="${@userController.logged}">
+    <h3 style="margin-right: 10px">Logged in as: <i id="username" th:text="${@userController.loggedUser.username}"></i></h3>
+    <a href="/logicmazes/logout"><button class="menuButtonSmall">Sign Out</button></a>
+</div>
+
+<div class="loginButtons" th:if="${!@userController.logged}">
+    <a href="/logicmazes/login" style="margin-right: 10px"><button class="menuButtonSmall">Sign In</button></a>
+    <a href="/logicmazes/register"><button class="menuButtonSmall">Sign Up</button></a>
+</div>
+
+<div id="flexContainerCentered">
+    <h1>Logic Mazes</h1>
+    <h2>Top scores</h2>
+
+    <div class="containerWithBackground" id="ratingField">
+        <h3>Current rating of Logic Mazes</h3>
+        <div style="display: flex">
+            <h2 th:text="${rating}"></h2>
+            <h2>/5</h2>
+        </div>
+        <div id="yourRatingMsg" th:if="${@userController.logged}" th:utext="${@userController.ratingByName}"></div>
+    </div>
+
+    <div class="containerWithBackground hiddenElement" id="starsContainer">
+        <h3>How do you rate my game?</h3>
+        <table>
+            <tr>
+                <td><img src="/img/emptyStar.png" onclick="rate(1)" onmouseover="fill(1)" onmouseout="empty(1)" id="star1"></td>
+                <td><img src="/img/emptyStar.png" onclick="rate(2)" onmouseover="fill(2)" onmouseout="empty(2)" id="star2"></td>
+                <td><img src="/img/emptyStar.png" onclick="rate(3)" onmouseover="fill(3)" onmouseout="empty(3)" id="star3"></td>
+                <td><img src="/img/emptyStar.png" onclick="rate(4)" onmouseover="fill(4)" onmouseout="empty(4)" id="star4"></td>
+                <td><img src="/img/emptyStar.png" onclick="rate(5)" onmouseover="fill(5)" onmouseout="empty(5)" id="star5"></td>
+            </tr>
+        </table>
+    </div>
+
+    <ul id="menuList">
+        <li th:if="${@userController.logged}"><button class='menuButton' id="submitButton" onclick="show()">Submit rating</button></li>
+        <li><button class='menuButton hiddenElement' id="cancelButton" onclick="hide()">Cancel</button></li>
+        <li><a href='/logicmazes'><button class='menuButton backButton'><< Back to menu</button></a></li>
+    </ul>
+</div>
+
+<script>
+    function show() {
+        document.getElementById("ratingField").style.marginBottom = "16px";
+        document.getElementById("starsContainer").classList.remove("hiddenElement");
+        document.getElementById("cancelButton").classList.remove("hiddenElement");
+        document.getElementById("submitButton").classList.add("hiddenElement");
+    }
+
+    function hide() {
+        document.getElementById("ratingField").style.marginBottom = 0;
+        document.getElementById("starsContainer").classList.add("hiddenElement");
+        document.getElementById("cancelButton").classList.add("hiddenElement");
+        document.getElementById("submitButton").classList.remove("hiddenElement");
+    }
+
+    function fill(count) {
+        for (let i = 1; i <= count; i++) {
+            document.getElementById("star" + i).setAttribute("src", "/img/fullStar.png");
+        }
+    }
+
+    function empty(count) {
+        for (let i = 1; i <= count; i++) {
+            document.getElementById("star" + i).setAttribute("src", "/img/emptyStar.png");
+        }
+    }
+
+    function rate(rating) {
+        if (confirm("Are you sure you want to rate this game " + rating + "/5?")) {
+            window.alert("Thanks for rating my game!");
+            let username = document.getElementById("username").textContent;
+            window.location.href = getPathFromUrl(window.location.href) + "?rating=" + rating + "&player=" + username;
+        }
+    }
+
+    function getPathFromUrl(url) {
+        return url.split(/[?#]/)[0];
+    }
+</script>
+
+</body>
+</html>

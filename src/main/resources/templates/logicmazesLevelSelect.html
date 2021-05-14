@@ -9,6 +9,16 @@
 </head>
 <body>
 
+<div class="loginButtons" th:if="${@userController.logged}">
+    <h3 style="margin-right: 10px">Logged in as: <i id="username" th:text="${@userController.loggedUser.username}"></i></h3>
+    <a href="/logicmazes/logout"><button class="menuButtonSmall">Sign Out</button></a>
+</div>
+
+<div class="loginButtons" th:if="${!@userController.logged}">
+    <a href="/logicmazes/login" style="margin-right: 10px"><button class="menuButtonSmall">Sign In</button></a>
+    <a href="/logicmazes/register"><button class="menuButtonSmall">Sign Up</button></a>
+</div>
+
 <div id="flexContainerCentered">
     <h1>Logic Mazes</h1>
     <h2>Select level</h2>

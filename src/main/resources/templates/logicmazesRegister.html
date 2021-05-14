@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/styleSheet.css">
+    <title>Gamestudio</title>
+</head>
+<body>
+
+<div id="flexContainerCentered">
+    <h1>Logic Mazes</h1>
+    <h2>Sign Up</h2>
+
+    <div class="containerWithBackground">
+        <form action="/logicmazes/register" id="registerLoginForm">
+            <table style="margin-bottom: 15px;">
+                <tr>
+                    <td><label for="username">Username:</label></td>
+                    <td><input type="text" name="username" id="username" required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" name="password" id="password" required></td>
+                </tr>
+            </table>
+            <button type="submit" class='menuButton'>Register</button>
+        </form>
+    </div>
+
+    <ul id="menuList">
+        <li><a href='/logicmazes'><button class='menuButton backButton'><< Back to menu</button></a></li>
+    </ul>
+</div>
+
+
+</body>
+</html>
